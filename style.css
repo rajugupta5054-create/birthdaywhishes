@@ -470,15 +470,64 @@ p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.3rem; font-weigh
 }
 
 /* Knife animation */
-.realistic-knife.slice-anim {
-    animation: sliceDown 1s forwards ease-in-out;
+.realistic-knife.rapid-chop {
+    animation: rapidChop 1.5s forwards ease-in-out;
 }
 
-@keyframes sliceDown {
-    0% { opacity: 0; top: -150px; }
-    20% { opacity: 1; top: -50px; }
-    60% { opacity: 1; top: 80px; } 
-    80% { opacity: 1; top: 80px; }
-    100% { opacity: 0; top: 80px; }
+@keyframes rapidChop {
+    0% { opacity: 0; top: -150px; transform: translateX(-50%) rotate(0deg); }
+    15% { opacity: 1; top: 40px; transform: translateX(-50%) rotate(0deg); } /* Chop 1 */
+    25% { top: -50px; transform: translateX(-50%) rotate(45deg); }
+    35% { top: 40px; transform: translateX(-50%) rotate(45deg); } /* Chop 2 */
+    45% { top: -50px; transform: translateX(-50%) rotate(-45deg); }
+    55% { top: 40px; transform: translateX(-50%) rotate(-45deg); } /* Chop 3 */
+    65% { top: -50px; transform: translateX(-50%) rotate(90deg); }
+    75% { top: 40px; transform: translateX(-50%) rotate(90deg); } /* Chop 4 */
+    85% { top: -150px; opacity: 1; }
+    100% { opacity: 0; top: -150px; }
 }
+
+/* 8-Piece Scatter Effect */
+#scattered-pieces {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    z-index: 100;
+}
+
+.scatter-piece {
+    position: absolute;
+    font-size: 5rem;
+    opacity: 0;
+    top: -40px; 
+    left: -40px;
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
+}
+
+.scatter-piece.burst {
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+.scatter-piece.p1.burst { animation-name: burst1; }
+.scatter-piece.p2.burst { animation-name: burst2; }
+.scatter-piece.p3.burst { animation-name: burst3; }
+.scatter-piece.p4.burst { animation-name: burst4; }
+.scatter-piece.p5.burst { animation-name: burst5; }
+.scatter-piece.p6.burst { animation-name: burst6; }
+.scatter-piece.p7.burst { animation-name: burst7; }
+.scatter-piece.p8.burst { animation-name: burst8; }
+
+@keyframes burst1 { 0% { opacity: 1; transform: scale(0.5); } 100% { transform: translate(-150px, -200px) scale(1) rotate(-45deg); opacity: 0; } }
+@keyframes burst2 { 0% { opacity: 1; transform: scale(0.5); } 100% { transform: translate(0, -250px) scale(1) rotate(20deg); opacity: 0; } }
+@keyframes burst3 { 0% { opacity: 1; transform: scale(0.5); } 100% { transform: translate(150px, -200px) scale(1) rotate(45deg); opacity: 0; } }
+@keyframes burst4 { 0% { opacity: 1; transform: scale(0.5); } 100% { transform: translate(250px, 0) scale(1) rotate(90deg); opacity: 0; } }
+@keyframes burst5 { 0% { opacity: 1; transform: scale(0.5); } 100% { transform: translate(150px, 200px) scale(1) rotate(135deg); opacity: 0; } }
+@keyframes burst6 { 0% { opacity: 1; transform: scale(0.5); } 100% { transform: translate(0, 250px) scale(1) rotate(180deg); opacity: 0; } }
+@keyframes burst7 { 0% { opacity: 1; transform: scale(0.5); } 100% { transform: translate(-150px, 200px) scale(1) rotate(225deg); opacity: 0; } }
+@keyframes burst8 { 0% { opacity: 1; transform: scale(0.5); } 100% { transform: translate(-250px, 0) scale(1) rotate(-90deg); opacity: 0; } }
 

@@ -274,38 +274,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 const realisticCakeScreen = document.getElementById('realistic-cake-screen');
                 const cutInstruction = document.getElementById('cut-instruction');
                 const knife = document.getElementById('realistic-knife');
-                const cakeLeft = document.getElementById('cake-left');
-                const cakeRight = document.getElementById('cake-right');
+                const realisticCakeContainer = document.getElementById('realistic-cake-container');
+                const scatteredPieces = document.getElementById('scattered-pieces');
 
                 realisticCakeScreen.classList.remove('hidden');
 
                 await new Promise((resolve) => {
                     const cutCake = async () => {
-                        cutInstruction.textContent = "Perfect slice! 🍰";
-                        // trigger knife animation
-                        knife.classList.add('slice-anim');
+                        cutInstruction.textContent = "Chop chop chop! 🔪";
+                        // trigger rapid knife animation
+                        knife.classList.add('rapid-chop');
                         
-                        await sleep(600); // wait for knife to hit the cake
+                        await sleep(1500); // wait for 4 fast chops to finish
                         
-                        // split cake
-                        cakeLeft.classList.add('cut');
-                        cakeRight.classList.add('cut');
+                        // Hide main cake and show scattered pieces burst
+                        realisticCakeContainer.classList.add('hidden');
+                        scatteredPieces.classList.remove('hidden');
+                        cutInstruction.textContent = "8 pieces! 🍰";
                         
-                        await sleep(2000); // Admire the inside of the realistic cake!
+                        const pieces = document.querySelectorAll('.scatter-piece');
+                        pieces.forEach(p => p.classList.add('burst'));
+                        
+                        await sleep(1500); // Admire the flying slices!
                         resolve();
                     };
 
                     // Wait for user to tap/click to cut
-                    document.getElementById('realistic-cake-container').addEventListener('click', cutCake, {once: true});
+                    realisticCakeContainer.addEventListener('click', cutCake, {once: true});
                 });
                 
                 realisticCakeScreen.classList.add('hidden');
 
                 // Reset for next time
                 cutInstruction.textContent = "Tap the cake to slice it! 🎂";
-                knife.classList.remove('slice-anim');
-                cakeLeft.classList.remove('cut');
-                cakeRight.classList.remove('cut');
+                knife.classList.remove('rapid-chop');
+                realisticCakeContainer.classList.remove('hidden');
+                scatteredPieces.classList.add('hidden');
+                document.querySelectorAll('.scatter-piece').forEach(p => p.classList.remove('burst'));
 
                 // FLASH!
                 flashOverlay.classList.add('flash-active');
