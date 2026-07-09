@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.innerHTML = originalText;
             btn.style.pointerEvents = 'auto';
             console.error("Error:", error);
-            alert("Could not connect to backend.");
+            alert("Could not connect to backend. Make sure app.py is running!");
         }
     });
 
