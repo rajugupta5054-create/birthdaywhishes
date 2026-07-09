@@ -27,5 +27,6 @@ def greet():
     return jsonify({'message': full_message})
 
 if __name__ == '__main__':
-    print("Starting server... Open http://127.0.0.1:5000 in your browser!")
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    print(f"Starting server... Open http://127.0.0.1:{port} in your browser!")
+    app.run(host='0.0.0.0', port=port, debug=True)
