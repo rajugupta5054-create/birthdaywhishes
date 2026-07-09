@@ -268,7 +268,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Hide candle screen elements
                 candleContainer.classList.add('hidden');
                 blowInstruction.classList.add('hidden');
+                darkScreen.classList.add('hidden');
 
+                // Realistic Cake Sequence
+                const realisticCakeScreen = document.getElementById('realistic-cake-screen');
+                const cutInstruction = document.getElementById('cut-instruction');
+                const knife = document.getElementById('realistic-knife');
+                const cakeLeft = document.getElementById('cake-left');
+                const cakeRight = document.getElementById('cake-right');
+
+                realisticCakeScreen.classList.remove('hidden');
+
+                await new Promise((resolve) => {
+                    const cutCake = async () => {
+                        cutInstruction.textContent = "Perfect slice! 🍰";
+                        // trigger knife animation
+                        knife.classList.add('slice-anim');
+                        
+                        await sleep(600); // wait for knife to hit the cake
+                        
+                        // split cake
+                        cakeLeft.classList.add('cut');
+                        cakeRight.classList.add('cut');
+                        
+                        await sleep(2000); // Admire the inside of the realistic cake!
+                        resolve();
+                    };
+
+                    // Wait for user to tap/click to cut
+                    document.getElementById('realistic-cake-container').addEventListener('click', cutCake, {once: true});
+                });
+                
+                realisticCakeScreen.classList.add('hidden');
+
+                // Reset for next time
+                cutInstruction.textContent = "Tap the cake to slice it! 🎂";
+                knife.classList.remove('slice-anim');
+                cakeLeft.classList.remove('cut');
+                cakeRight.classList.remove('cut');
+
+                // FLASH!
                 flashOverlay.classList.add('flash-active');
                 
                 setTimeout(() => {
