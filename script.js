@@ -178,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 await sleep(500);
                 await showText(`Close your eyes...`, 2000);
                 await showText(`Make a wish, ${name}...`, 2500);
-                await showText(`Blow out the candles in...`, 2000);
                 
                 typingText.style.transition = 'none';
                 typingText.classList.add('visible');
@@ -190,6 +189,85 @@ document.addEventListener('DOMContentLoaded', () => {
                 await sleep(1000);
                 typingText.textContent = '1';
                 await sleep(800);
+
+                typingText.classList.remove('visible');
+                await sleep(500);
+
+                // Show Realistic Candle
+                const candleContainer = document.getElementById('candle-container');
+                const blowInstruction = document.getElementById('blow-instruction');
+                const flame = document.getElementById('flame');
+                
+                candleContainer.classList.remove('hidden');
+                blowInstruction.classList.remove('hidden');
+
+                // Wait for blow!
+                await new Promise((resolve) => {
+                    let stream;
+                    let audioContext;
+                    
+                    const finishBlow = () => {
+                        flame.classList.add('out');
+                        // Add smoke
+                        const smoke = document.createElement('div');
+                        smoke.classList.add('smoke');
+                        document.querySelector('.candle').appendChild(smoke);
+                        
+                        if(stream) {
+                            stream.getTracks().forEach(track => track.stop());
+                        }
+                        if(audioContext) {
+                            audioContext.close();
+                        }
+                        resolve();
+                    };
+
+                    // Click fallback
+                    candleContainer.addEventListener('click', finishBlow, {once: true});
+
+                    // Mic setup
+                    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                        navigator.mediaDevices.getUserMedia({ audio: true })
+                            .then(mediaStream => {
+                                stream = mediaStream;
+                                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                                const analyser = audioContext.createAnalyser();
+                                const microphone = audioContext.createMediaStreamSource(stream);
+                                microphone.connect(analyser);
+                                analyser.fftSize = 256;
+                                const bufferLength = analyser.frequencyBinCount;
+                                const dataArray = new Uint8Array(bufferLength);
+
+                                const detectBlow = () => {
+                                    if(flame.classList.contains('out')) return;
+                                    analyser.getByteFrequencyData(dataArray);
+                                    
+                                    let sum = 0;
+                                    for(let i = 0; i < 50; i++) {
+                                        sum += dataArray[i];
+                                    }
+                                    const average = sum / 50;
+                                    
+                                    if(average > 80) { // Threshold for blowing
+                                        finishBlow();
+                                    } else {
+                                        requestAnimationFrame(detectBlow);
+                                    }
+                                };
+                                detectBlow();
+                            })
+                            .catch(err => {
+                                console.log("Mic access denied or unavailable, using click fallback", err);
+                            });
+                    }
+                });
+
+                // Blown out! Wait for smoke to rise
+                await sleep(1500);
+
+                // Hide candle screen elements
+                candleContainer.classList.add('hidden');
+                blowInstruction.classList.add('hidden');
 
                 flashOverlay.classList.add('flash-active');
                 
