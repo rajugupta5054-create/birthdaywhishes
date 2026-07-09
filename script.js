@@ -134,12 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
         particles = [];
     }
 
-    const typeText = async (text, delay = 70) => {
-        typingText.textContent = '';
-        for (let i = 0; i < text.length; i++) {
-            typingText.textContent += text.charAt(i);
-            await new Promise(r => setTimeout(r, delay));
-        }
+    const showText = async (text, duration) => {
+        typingText.textContent = text;
+        typingText.classList.add('visible');
+        await sleep(duration);
+        typingText.classList.remove('visible');
+        await sleep(800);
     };
     const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
@@ -176,14 +176,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 darkScreen.classList.remove('hidden');
                 
                 await sleep(500);
-                await typeText(`Close your eyes...`, 90);
-                await sleep(1500);
+                await showText(`Close your eyes...`, 2000);
+                await showText(`Make a wish, ${name}...`, 2500);
+                await showText(`Blow out the candles in...`, 2000);
                 
-                await typeText(`Make a wish, ${name}...`, 80);
-                await sleep(1500);
-                
-                await typeText(`Blow out the candles in...`, 70);
-                await sleep(800);
+                typingText.style.transition = 'none';
+                typingText.classList.add('visible');
                 
                 typingText.textContent = '3';
                 typingText.style.fontSize = '8rem';

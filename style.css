@@ -135,13 +135,25 @@ p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.3rem; font-weigh
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
     display: flex; justify-content: center; align-items: center;
     z-index: 50;
-    background-color: #2d3436; /* Soft dark */
+    background-color: #1e272e; /* Deeper darker color for better contrast */
 }
 
 .handwritten-text {
     font-family: 'Caveat', cursive;
-    font-size: 4rem; color: #fff; text-shadow: 0 0 15px rgba(255,255,255,0.4);
-    text-align: center; min-height: 5rem; transition: font-size 0.3s ease;
+    font-size: 6rem; /* Much larger for clarity */
+    font-weight: 700;
+    color: #fff; 
+    text-shadow: 0 5px 20px rgba(0,0,0,0.6);
+    text-align: center; 
+    min-height: 5rem; 
+    transition: opacity 0.8s ease, transform 0.8s ease, font-size 0.3s ease;
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.handwritten-text.visible {
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* Wish Screen */
