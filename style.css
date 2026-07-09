@@ -135,15 +135,17 @@ p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.3rem; font-weigh
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
     display: flex; justify-content: center; align-items: center;
     z-index: 50;
-    background-color: #1e272e; /* Deeper darker color for better contrast */
+    background-color: rgba(255, 255, 255, 0.85); /* Bright white frosted glass instead of black */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 }
 
 .handwritten-text {
     font-family: 'Caveat', cursive;
-    font-size: 6rem; /* Much larger for clarity */
+    font-size: 6.5rem; /* Large and clear */
     font-weight: 700;
-    color: #fff; 
-    text-shadow: 0 5px 20px rgba(0,0,0,0.6);
+    color: var(--primary-color); /* Use festive primary color */
+    text-shadow: 3px 3px 0px rgba(255,255,255,1), 6px 6px 15px rgba(255, 107, 107, 0.4); /* Removed black shadows */
     text-align: center; 
     min-height: 5rem; 
     transition: opacity 0.8s ease, transform 0.8s ease, font-size 0.3s ease;
