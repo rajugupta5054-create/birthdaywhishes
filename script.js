@@ -268,7 +268,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Hide candle screen elements
                 candleContainer.classList.add('hidden');
                 blowInstruction.classList.add('hidden');
+                darkScreen.classList.add('hidden');
 
+                // TEDDY SEQUENCE!
+                const teddyScreen = document.getElementById('teddy-screen');
+                const teddy = document.querySelector('.teddy');
+                const knife = document.querySelector('.knife');
+                const cakeWhole = document.querySelector('.cake-whole');
+                const cakeHalves = document.querySelector('.cake-halves');
+                const teddyText = document.getElementById('teddy-text');
+
+                teddyScreen.classList.remove('hidden');
+                
+                // Teddy walks in
+                teddy.classList.add('walk-in');
+                await sleep(2000);
+                
+                // Knife appears and cuts
+                knife.classList.add('cut');
+                await sleep(600); // Wait for the knife swing to hit the cake
+                
+                // Cake splits
+                cakeWhole.classList.add('hidden');
+                cakeHalves.classList.remove('hidden');
+                teddyText.textContent = "Yay! Let's make a wish! 🎈";
+                
+                await sleep(2000); // Wait for the cake pieces to fall and read text
+                teddyScreen.classList.add('hidden');
+
+                // Reset for next time
+                teddy.classList.remove('walk-in');
+                knife.classList.remove('cut');
+                cakeWhole.classList.remove('hidden');
+                cakeHalves.classList.add('hidden');
+                teddyText.textContent = "Teddy is cutting the cake...";
+
+                // FLASH!
                 flashOverlay.classList.add('flash-active');
                 
                 setTimeout(() => {

@@ -299,3 +299,96 @@ p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.3rem; font-weigh
 }
 .wax .drop:nth-child(1) { left: 10px; height: 35px; }
 .wax .drop:nth-child(2) { right: 12px; height: 20px; top: 5px; }
+
+/* Teddy Sequence */
+#teddy-screen {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    z-index: 60;
+    background-color: rgba(255, 255, 255, 0.95); 
+    backdrop-filter: blur(15px);
+}
+
+#teddy-container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    font-size: 6rem;
+    margin-bottom: 20px;
+}
+
+.cake-whole {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.cake-halves {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.cake-half.left {
+    animation: slideLeft 1.5s forwards;
+}
+
+.cake-half.right {
+    animation: slideRight 1.5s forwards;
+}
+
+.teddy {
+    position: absolute;
+    bottom: 0;
+    left: -150px;
+    z-index: 3;
+    opacity: 0;
+}
+
+.teddy.walk-in {
+    animation: walkIn 2s forwards;
+}
+
+.knife {
+    position: absolute;
+    bottom: 60px;
+    left: 30px;
+    font-size: 4rem;
+    z-index: 4;
+    opacity: 0;
+}
+
+.knife.cut {
+    animation: chop 1s forwards;
+}
+
+@keyframes walkIn {
+    0% { left: -150px; opacity: 0; transform: rotate(-10deg); }
+    25% { transform: rotate(10deg); opacity: 1; }
+    50% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+    100% { left: 10px; opacity: 1; transform: rotate(0deg); }
+}
+
+@keyframes chop {
+    0% { bottom: 100px; opacity: 0; transform: rotate(45deg); }
+    20% { opacity: 1; }
+    50% { bottom: 20px; transform: rotate(-30deg); }
+    80% { opacity: 1; }
+    100% { bottom: 20px; opacity: 0; }
+}
+
+@keyframes slideLeft {
+    to { transform: translateX(-80px) rotate(-30deg); opacity: 0; }
+}
+
+@keyframes slideRight {
+    to { transform: translateX(80px) rotate(30deg); opacity: 0; }
+}
