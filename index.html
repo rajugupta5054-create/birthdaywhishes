@@ -6,7 +6,7 @@
     <title>Happy Birthday!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,40 +22,40 @@
         <!-- Entry Screen -->
         <div id="entry-screen" class="glass-card fade-in tiltable">
             <div class="card-content">
-                <h1>It's Time to Party! 🎉</h1>
-                <p>Whose special day is it?</p>
+                <h1 class="celebrate-title">Let's Celebrate! 🎂</h1>
+                <p>Who is the birthday star today?</p>
                 <form id="name-form">
                     <div class="input-group">
                         <input type="text" id="name-input" placeholder="Enter name..." required autocomplete="off">
                         <div class="input-glow"></div>
                     </div>
                     <button type="submit" class="primary-btn glow-on-hover">
-                        <span>Unwrap Surprise</span>
-                        <span class="btn-icon">🎁</span>
+                        <span>Send Wishes</span>
+                        <span class="btn-icon">💌</span>
                     </button>
                 </form>
             </div>
         </div>
 
-        <!-- Dark Surprise Screen -->
+        <!-- Surprise Screen -->
         <div id="dark-screen" class="hidden">
-            <div id="typing-text" class="mono-text"></div>
+            <div id="typing-text" class="handwritten-text"></div>
         </div>
 
         <!-- Wish Screen -->
         <div id="wish-screen" class="glass-card hidden tiltable">
             <div class="wish-content card-content">
                 <div class="cake-container">
-                    <div class="cake">🎂</div>
+                    <div class="cake">🎉</div>
                     <div class="sparkles">✨</div>
                 </div>
                 
-                <h2 id="bday-name" class="neon-text"></h2>
+                <h2 id="bday-name" class="festive-text"></h2>
                 
-                <p class="wish-message">Wishing you a spectacular day filled with joy, love, and endless celebrations!</p>
+                <p class="wish-message">May your birthday be as incredibly special as you are! Wishing you love, laughter, and a wonderful year ahead.</p>
                 
                 <button id="reset-btn" class="secondary-btn glow-on-hover">
-                    <span>Celebrate Again</span>
+                    <span>Send Another</span>
                 </button>
             </div>
         </div>
